@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block content %}
+<h2>Dashboard</h2>
+<div class="cards">
+<div class="card"><div class="label">Delivery Stops</div><div class="value">{{ stops }}</div></div>
+<div class="card"><div class="label">Total Parcels</div><div class="value">{{ parcels }}</div></div>
+<div class="card"><div class="label">Last Optimized Distance</div><div class="value">{{ last.optimized_km if last else 0 }} km</div></div>
+<div class="card"><div class="label">Distance Saved</div><div class="value green">{{ last.saving_pct if last else 0 }}%</div></div>
+</div>
+<a class="btn" href="{{ url_for('locations') }}">Manage Locations</a>
+<a class="btn alt" href="{{ url_for('optimize') }}">Optimize Route</a>
+<a class="btn" href="{{ url_for('report') }}">View Reports</a>
+{% if last %}<p class="muted" style="margin-top:18px"><b>Last route ({{ last.created_at }}):</b> {{ last.sequence }}</p>{% endif %}
+{% endblock %}

@@ -1,0 +1,8 @@
+{% extends "base.html" %}{% block content %}
+<h2>Route Optimization Report</h2>
+<table><tr><th>Run</th><th>Date &amp; Time</th><th>Stops</th><th>Original (km)</th><th>Optimized (km)</th><th>Saved (km)</th><th>Saving %</th><th>Fuel Saved (&#8377;)</th></tr>
+{% for r in routes %}<tr><td>{{ r.id }}</td><td>{{ r.created_at }}</td><td>{{ r.stops }}</td><td>{{ r.original_km }}</td><td>{{ r.optimized_km }}</td>
+<td>{{ "%.2f"|format(r.original_km - r.optimized_km) }}</td><td><b style="color:#059669">{{ r.saving_pct }}%</b></td><td>{{ "%.2f"|format((r.original_km - r.optimized_km) * rate) }}</td></tr>{% endfor %}
+</table>
+{% if routes %}<p class="muted" style="margin-top:14px"><b>Latest sequence:</b> {{ routes[0].sequence }}</p>{% endif %}
+{% endblock %}

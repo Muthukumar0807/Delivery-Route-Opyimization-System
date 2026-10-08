@@ -1,0 +1,31 @@
+*{box-sizing:border-box}
+body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:#f1f5f9;color:#0f172a}
+.topbar{background:#0f3d3e;color:#fff;padding:14px 28px;display:flex;justify-content:space-between;align-items:center}
+.topbar h1{font-size:20px;margin:0}
+.topbar a{color:#d1fae5;text-decoration:none;margin-left:18px;font-size:14px}
+.container{max-width:1080px;margin:28px auto;padding:0 24px}
+h2{margin:0 0 18px;font-size:28px}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:22px}
+.card{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(15,23,42,.08)}
+.card .label{font-size:14px;color:#475569;font-weight:600}
+.card .value{font-size:30px;font-weight:700;margin-top:10px}
+.card .value.green{color:#059669}
+.btn{display:inline-block;background:#0f766e;color:#fff;border:0;border-radius:6px;padding:10px 16px;font-size:14px;text-decoration:none;cursor:pointer;margin-right:6px}
+.btn.alt{background:#f59e0b}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 2px 8px rgba(15,23,42,.06)}
+th,td{padding:10px 14px;text-align:left;font-size:14px;border-bottom:1px solid #e2e8f0}
+th{background:#f8fafc;color:#334155}
+.form{background:#fff;padding:16px;border-radius:12px;margin-bottom:18px;display:flex;gap:10px;flex-wrap:wrap;align-items:center;box-shadow:0 2px 8px rgba(15,23,42,.06)}
+input{padding:9px 11px;border:1px solid #cbd5e1;border-radius:6px;font-size:14px}
+.flash{background:#ecfdf5;border:1px solid #6ee7b7;color:#065f46;padding:10px 14px;border-radius:8px;margin-bottom:14px}
+.badge{background:#fde68a;color:#92400e;border-radius:10px;padding:2px 8px;font-size:12px;font-weight:700}
+.login-wrap{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0f3d3e,#14b8a6)}
+.login{background:#fff;padding:36px 40px;border-radius:16px;width:420px;box-shadow:0 12px 30px rgba(0,0,0,.2)}
+.login h1{margin:0 0 6px;font-size:30px}
+.login p{color:#475569;margin:0 0 20px}
+.login input{width:100%;margin-bottom:12px}
+.login .btn{width:100%;padding:12px}
+.grid2{display:grid;grid-template-columns:1.15fr 1fr;gap:18px}
+.map{background:#fff;border-radius:12px;padding:12px;box-shadow:0 2px 8px rgba(15,23,42,.06)}
+.muted{color:#64748b;font-size:13px}
+a.del{color:#dc2626}

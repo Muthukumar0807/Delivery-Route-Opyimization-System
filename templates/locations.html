@@ -1,0 +1,16 @@
+{% extends "base.html" %}{% block content %}
+<h2>Delivery Locations</h2>
+<form class="form" method="post">
+<input name="name" placeholder="Location Name" required>
+<input name="latitude" placeholder="Latitude" size="9" required>
+<input name="longitude" placeholder="Longitude" size="9" required>
+<input name="parcels" placeholder="Parcels" size="6" value="1" required>
+<label class="muted"><input type="checkbox" name="is_depot"> Depot</label>
+<button class="btn" type="submit">Add Location</button>
+</form>
+<table><tr><th>#</th><th>Location</th><th>Latitude</th><th>Longitude</th><th>Parcels</th><th>Type</th><th>Action</th></tr>
+{% for l in locations %}<tr><td>{{ loop.index }}</td><td>{{ l.name }}</td><td>{{ "%.4f"|format(l.latitude) }}</td><td>{{ "%.4f"|format(l.longitude) }}</td>
+<td>{{ l.parcels }}</td><td>{% if l.is_depot %}<span class="badge">DEPOT</span>{% else %}Delivery{% endif %}</td>
+<td><a class="del" href="{{ url_for('delete_location', location_id=l.id) }}">Delete</a></td></tr>{% endfor %}
+</table>
+{% endblock %}

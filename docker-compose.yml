@@ -1,0 +1,9 @@
+services:
+  route-optimizer:
+    build: .
+    container_name: delivery-route-optimizer
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./delivery.db:/app/delivery.db
+    restart: unless-stopped

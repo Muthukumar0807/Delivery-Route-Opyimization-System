@@ -1,0 +1,28 @@
+{% extends "base.html" %}{% block content %}
+<h2>Optimized Delivery Route</h2>
+<div class="cards">
+<div class="card"><div class="label">Original Distance</div><div class="value">{{ orig_km }} km</div></div>
+<div class="card"><div class="label">Optimized Distance</div><div class="value green">{{ opt_km }} km</div></div>
+<div class="card"><div class="label">Estimated Time</div><div class="value">{{ time }}</div></div>
+<div class="card"><div class="label">Fuel Cost (Saved)</div><div class="value">&#8377;{{ fuel }}</div><div class="muted">&#8377;{{ fuel_saved }} saved &middot; {{ saving }}% shorter</div></div>
+</div>
+{% set lats = rows|map(attribute='latitude')|list %}{% set lons = rows|map(attribute='longitude')|list %}
+{% set minla, maxla, minlo, maxlo = lats|min, lats|max, lons|min, lons|max %}
+{% macro X(lo) %}{{ 40 + (lo - minlo) / (maxlo - minlo) * 360 }}{% endmacro %}
+{% macro Y(la) %}{{ 400 - (la - minla) / (maxla - minla) * 360 }}{% endmacro %}
+<div class="grid2">
+<div class="map"><b>Route Map</b> <span class="muted">(depot = orange, numbers = visit order)</span>
+<svg viewBox="0 0 520 440" width="100%">
+<rect x="0" y="0" width="520" height="440" fill="#f0fdfa" rx="8"/>
+{% for i in range(order|length - 1) %}{% set a = rows[order[i]] %}{% set b = rows[order[i+1]] %}
+<line x1="{{ X(a.longitude) }}" y1="{{ Y(a.latitude) }}" x2="{{ X(b.longitude) }}" y2="{{ Y(b.latitude) }}" stroke="#0f766e" stroke-width="3" marker-end="url(#arr)"/>{% endfor %}
+<defs><marker id="arr" viewBox="0 0 10 10" refX="16" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0L10,5L0,10z" fill="#0f766e"/></marker></defs>
+{% for idx in order[:-1] %}{% set r = rows[idx] %}
+<circle cx="{{ X(r.longitude) }}" cy="{{ Y(r.latitude) }}" r="{{ 11 if r.is_depot else 9 }}" fill="{{ '#f59e0b' if r.is_depot else '#0f3d3e' }}"/>
+<text x="{{ X(r.longitude) }}" y="{{ Y(r.latitude)|float + 4 }}" font-size="10" fill="#fff" text-anchor="middle" font-weight="700">{{ 'D' if r.is_depot else loop.index0 }}</text>
+<text x="{{ X(r.longitude)|float + 13 }}" y="{{ Y(r.latitude)|float - 8 }}" font-size="11" fill="#0f172a">{{ r.name }}</text>{% endfor %}
+</svg></div>
+<div><table><tr><th>Step</th><th>From</th><th>To</th><th>Km</th></tr>
+{% for l in legs %}<tr><td>{{ l.step }}</td><td>{{ l.from }}</td><td>{{ l.to }}</td><td>{{ l.km }}</td></tr>{% endfor %}
+</table></div></div>
+{% endblock %}
